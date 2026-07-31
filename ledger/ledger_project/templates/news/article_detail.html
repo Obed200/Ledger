@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ article.title }} — THE LEDGER{% endblock %}
+{% block content %}
+<div class="wrap article-detail">
+  <a class="back-link" href="{% url 'news:home' %}">← Front Page</a>
+  <div class="eyebrow cat-{{ article.category }}" style="margin-top:18px;">{{ article.category }}</div>
+  <h1>{{ article.title }}</h1>
+  <div class="dek">{{ article.dek }}</div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div class="avatar">
+      {% if article.author.profile.avatar %}
+        <img src="{{ article.author.profile.avatar.url }}" alt="{{ article.author.profile.display_name }}">
+      {% else %}
+        {{ article.author.profile.display_name|default:article.author.username|slice:":2"|upper }}
+      {% endif %}
+    </div>
+    <div>
+      <div class="byline" style="font-weight:600;">{{ article.author.profile.display_name|default:article.author.username }}</div>
+      <div class="byline">{{ article.created_at|date:"M j, Y" }}{% if article.author.profile.bio %} · {{ article.author.profile.bio }}{% endif %}</div>
+    </div>
+  </div>
+  {% if article.image %}<img src="{{ article.image.url }}" alt="{{ article.title }}">{% endif %}
+  <hr class="rule" style="margin:22px 0;">
+  <div class="article-body">
+    {% for p in article.paragraphs %}<p>{{ p }}</p>{% endfor %}
+  </div>
+</div>
+{% endblock %}

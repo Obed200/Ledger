@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}Author dashboard — THE LEDGER{% endblock %}
+{% block content %}
+<div class="wrap dash">
+  <div class="dash-head">
+    <div>
+      <div class="dash-role">Author dashboard</div>
+      <div class="dash-title">Welcome, {{ user.profile.display_name }}</div>
+    </div>
+    <a class="btn" href="{% url 'news:home' %}">View site →</a>
+  </div>
+  <div class="dash-grid">
+    <div class="panel">
+      <h3>Write a new story</h3>
+      <div class="phint">Published stories appear on the front page immediately.</div>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="{{ form.title.id_for_label }}">Headline</label>
+        {{ form.title }}{{ form.title.errors }}
+
+        <label for="{{ form.category.id_for_label }}">Category</label>
+        {{ form.category }}{{ form.category.errors }}
+
+        <label for="{{ form.dek.id_for_label }}">Dek (one-sentence summary)</label>
+        {{ form.dek }}{{ form.dek.errors }}
+
+        <label for="{{ form.image.id_for_label }}">Photo</label>
+        {{ form.image }}
+        <div class="helptext">Optional. Shown at the top of the story and in listings.</div>
+        {{ form.image.errors }}
+
+        <label for="{{ form.body.id_for_label }}">Story</label>
+        {{ form.body }}
+        <div class="helptext">Leave a blank line between paragraphs.</div>
+        {{ form.body.errors }}
+
+        <div style="margin-top:16px;"><button class="btn btn-solid" style="width:100%;" type="submit">Publish story</button></div>
+      </form>
+    </div>
+    <div class="panel">
+      <h3>Your stories</h3>
+      <div class="phint">{{ articles|length }} published</div>
+      <table>
+        <thead><tr><th>Headline</th><th>Category</th><th>Date</th><th></th></tr></thead>
+        <tbody>
+          {% for a in articles %}
+          <tr>
+            <td><a href="{{ a.get_absolute_url }}">{{ a.title|truncatechars:50 }}</a></td>
+            <td>{{ a.category }}</td>
+            <td>{{ a.created_at|date:"M j, Y" }}</td>
+            <td>
+              <form method="post" action="{% url 'news:delete_article' a.pk %}" onsubmit="return confirm('Delete this story?');">
+                {% csrf_token %}
+                <button type="submit" class="link-del">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="4" style="color:var(--muted);">Nothing published yet — write your first story.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
