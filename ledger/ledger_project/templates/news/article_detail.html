@@ -2,7 +2,7 @@
 {% block title %}{{ article.title }} — THE LEDGER{% endblock %}
 {% block content %}
 <div class="wrap article-detail">
-  <a class="back-link" href="{% url 'news:home' %}">← Front Page</a>
+  <a class="back-link" href="{% url 'news:home' %}">← Spotlight</a>
   <div class="detail-head">
     <div class="eyebrow cat-{{ article.category }}">{{ article.category }}</div>
     {% if user.is_authenticated %}

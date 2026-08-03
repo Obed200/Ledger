@@ -51,7 +51,7 @@
     </div>
   </div>
   <nav class="mainnav">
-    <a href="{% url 'news:home' %}" class="{% if active_category == 'All' or not active_category %}active{% endif %}">Front Page</a>
+    <a href="{% url 'news:home' %}" class="{% if active_category == 'All' or not active_category %}active{% endif %}">Spotlight</a>
     {% for c in nav_categories %}
       <a href="{% url 'news:home' %}?category={{ c }}" class="{% if active_category == c %}active{% endif %}">{{ c }}</a>
     {% endfor %}
@@ -91,15 +91,15 @@
       <ul class="footer-contact">
         <li>
           <span class="fc-label">Email</span>
-          <a href="mailto:nizeyelie25@gmail.com">nizeyelie25@gmail.com</a>
+          <a href="mailto:aimablefaniky@gmail.com">aimablefaniky@gmail.com</a>
         </li>
         <li>
           <span class="fc-label">Phone</span>
-          <a href="tel:+250790235414">0790235414</a>
+          <a href="tel:+250790707700">+250 790 707 700</a>
         </li>
         <li>
           <span class="fc-label">Address</span>
-          <address>Nyabugogo, Kigali, Rwanda</address>
+          <address>Kabuga, Kigali, Rwanda</address>
         </li>
       </ul>
     </div>
@@ -107,7 +107,7 @@
 
   <div class="wrap footer-base">
     <span>&copy; {% now "Y" %} The Ledger. All rights reserved.</span>
-    <span>Nyabugogo, Kigali · <a href="tel:+250790235414">0790235414</a></span>
+    <span>Kabuga, Kigali · <a href="tel:+250790707700">+250 790 707 700</a></span>
   </div>
 </footer>
 
