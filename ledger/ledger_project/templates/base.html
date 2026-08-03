@@ -70,9 +70,45 @@
   {% block content %}{% endblock %}
 </main>
 
-<footer class="wrap">
-  <div class="flogo">THE LEDGER</div>
-  <p>An independent publication covering news, the economy, technology, the environment, education, sport and more — built with Django so the editorial team can manage authors, photo galleries, links and video in one place.</p>
+<footer>
+  <div class="wrap footer-grid">
+    <div class="footer-about">
+      <div class="flogo">THE LEDGER</div>
+      <p>An independent publication covering news, the economy, technology, the environment, education, sport and more — built with Django so the editorial team can manage authors, photo galleries, links and video in one place.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Sections</h4>
+      <ul class="footer-links">
+        {% for c in nav_categories %}
+          <li><a href="{% url 'news:home' %}?category={{ c }}">{{ c }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul class="footer-contact">
+        <li>
+          <span class="fc-label">Email</span>
+          <a href="mailto:nizeyelie25@gmail.com">nizeyelie25@gmail.com</a>
+        </li>
+        <li>
+          <span class="fc-label">Phone</span>
+          <a href="tel:+250790235414">0790235414</a>
+        </li>
+        <li>
+          <span class="fc-label">Address</span>
+          <address>Nyabugogo, Kigali, Rwanda</address>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wrap footer-base">
+    <span>&copy; {% now "Y" %} The Ledger. All rights reserved.</span>
+    <span>Nyabugogo, Kigali · <a href="tel:+250790235414">0790235414</a></span>
+  </div>
 </footer>
 
 </body>
