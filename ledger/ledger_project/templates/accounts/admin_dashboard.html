@@ -44,6 +44,7 @@
     <div class="panel">
       <h3>Accounts</h3>
       <div class="phint">{{ authors|length }} author{{ authors|length|pluralize }}</div>
+      <div class="table-scroll">
       <table>
         <thead><tr><th>Name</th><th>Username</th><th>Role</th><th>Stories</th><th></th></tr></thead>
         <tbody>
@@ -70,9 +71,11 @@
           {% endfor %}
         </tbody>
       </table>
+      </div>
 
       <h3 style="margin-top:28px;">All stories</h3>
       <div class="phint">Feature a story to make it the front-page lead.</div>
+      <div class="table-scroll">
       <table>
         <thead><tr><th>Headline</th><th>Author</th><th>Section</th><th>Media</th><th></th><th></th></tr></thead>
         <tbody>
@@ -103,6 +106,7 @@
           {% endfor %}
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 </div>
