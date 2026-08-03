@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{% block title %}THE LEDGER — Business, Markets &amp; Power{% endblock %}</title>
+<title>{% block title %}THE LEDGER — News, Economy, Technology &amp; More{% endblock %}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -52,11 +52,9 @@
   </div>
   <nav class="mainnav">
     <a href="{% url 'news:home' %}" class="{% if active_category == 'All' or not active_category %}active{% endif %}">Front Page</a>
-    <a href="{% url 'news:home' %}?category=Business" class="{% if active_category == 'Business' %}active{% endif %}">Business</a>
-    <a href="{% url 'news:home' %}?category=Markets" class="{% if active_category == 'Markets' %}active{% endif %}">Markets</a>
-    <a href="{% url 'news:home' %}?category=Leadership" class="{% if active_category == 'Leadership' %}active{% endif %}">Leadership</a>
-    <a href="{% url 'news:home' %}?category=Technology" class="{% if active_category == 'Technology' %}active{% endif %}">Technology</a>
-    <a href="{% url 'news:home' %}?category=Money" class="{% if active_category == 'Money' %}active{% endif %}">Money</a>
+    {% for c in nav_categories %}
+      <a href="{% url 'news:home' %}?category={{ c }}" class="{% if active_category == c %}active{% endif %}">{{ c }}</a>
+    {% endfor %}
   </nav>
 </header>
 
@@ -74,7 +72,7 @@
 
 <footer class="wrap">
   <div class="flogo">THE LEDGER</div>
-  <p>An independent publication about business, markets and leadership, built with Django so the editorial team can manage authors and stories — including photos — in one place.</p>
+  <p>An independent publication covering news, the economy, technology, the environment, education, sport and more — built with Django so the editorial team can manage authors, photo galleries, links and video in one place.</p>
 </footer>
 
 </body>

@@ -74,20 +74,26 @@
       <h3 style="margin-top:28px;">All stories</h3>
       <div class="phint">Feature a story to make it the front-page lead.</div>
       <table>
-        <thead><tr><th>Headline</th><th>Author</th><th>Category</th><th></th><th></th></tr></thead>
+        <thead><tr><th>Headline</th><th>Author</th><th>Section</th><th>Media</th><th></th><th></th></tr></thead>
         <tbody>
           {% for a in articles %}
           <tr>
             <td><a href="{{ a.get_absolute_url }}">{{ a.title|truncatechars:50 }}</a></td>
             <td>{{ a.author.profile.display_name|default:a.author.username }}</td>
             <td>{{ a.category }}</td>
+            <td class="media-cell">
+              {% if a.photo_count %}{{ a.photo_count }} photo{{ a.photo_count|pluralize }}{% endif %}
+              {% if a.has_video %}{% if a.photo_count %} · {% endif %}▶ video{% endif %}
+              {% if not a.photo_count and not a.has_video %}—{% endif %}
+            </td>
             <td>
               <form method="post" action="{% url 'news:toggle_featured' a.pk %}">
                 {% csrf_token %}
                 <button type="submit" class="link-del" style="color:{% if a.featured %}var(--green){% else %}var(--muted){% endif %};">{% if a.featured %}Featured{% else %}Feature{% endif %}</button>
               </form>
             </td>
-            <td>
+            <td class="row-actions">
+              <a class="link-edit" href="{{ a.get_edit_url }}">Edit</a>
               <form method="post" action="{% url 'news:delete_article' a.pk %}" onsubmit="return confirm('Delete this story?');">
                 {% csrf_token %}
                 <button type="submit" class="link-del">Delete</button>

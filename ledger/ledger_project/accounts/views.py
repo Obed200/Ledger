@@ -33,7 +33,7 @@ def admin_dashboard(request):
         form = CreateAuthorForm()
 
     authors = Profile.objects.select_related("user").filter(role="author")
-    articles = Article.objects.select_related("author").all()
+    articles = Article.objects.select_related("author", "author__profile").prefetch_related("photos")
     return render(
         request,
         "accounts/admin_dashboard.html",
